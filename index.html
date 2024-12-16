@@ -4,20 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Suivi de Médicaments</title>
-    
-    <!-- Styles -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    
-    <!-- React -->
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-    
-    <!-- PWA -->
-    <link rel="manifest" href="manifest.json">
 </head>
-<body class="bg-gray-100">
+<body>
     <div id="root"></div>
-    <script type="text/babel" src="app.js"></script>
+    <script type="text/babel">
+        function App() {
+            const [count, setCount] = React.useState(0);
+            const max = 8;
+
+            return (
+                <div className="p-4 max-w-md mx-auto bg-white rounded shadow mt-10">
+                    <h1 className="text-xl font-bold mb-4">Suivi de Médicaments</h1>
+                    <p className="text-center text-2xl font-bold">{count} / {max}</p>
+                    <div className="flex gap-4 justify-center mt-4">
+                        <button 
+                            onClick={() => count < max && setCount(count + 1)}
+                            className="px-4 py-2 bg-blue-500 text-white rounded"
+                            disabled={count >= max}
+                        >
+                            Ajouter
+                        </button>
+                        <button 
+                            onClick={() => setCount(0)}
+                            className="px-4 py-2 bg-gray-500 text-white rounded"
+                        >
+                            Réinitialiser
+                        </button>
+                    </div>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
 </body>
 </html>
